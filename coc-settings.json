@@ -10,7 +10,9 @@
     "markdown",
     "typescript",
     "python",
-    "dart"
+    "dart",
+    "go",
+    "scss"
   ],
 
   // suggest settings
@@ -72,7 +74,7 @@
   "git.changedSign.text": "▌",
 
   // other language specific settings
-  "html.autoClosingTags": true,
+  "html.autoClosingTags": false,
   "prettier.proseWrap": "always",
   "python.formatting.provider": "black"
 }

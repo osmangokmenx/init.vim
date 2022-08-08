@@ -1,18 +1,17 @@
 <p align="center">
     <img src="./ss/home.png">
+    <img src="./ss/demo.png">
 </p>
 
 ## Features
 
 - Single file (you don't want your dotfiles to be all Vim script)
-- Super minimal (~400 lines)
 - Super fast startup (less than 40ms!)
 - Lazy loading plugins
 - Highly customizable
-- Beautiful [Material ocean](https://github.com/material-ocean/Material-Ocean)
+- Beautiful [One Dark](https://github.com/osmangokmenx/onedark.vim)
   color scheme
 - Various IDE features via [coc.nvim](https://github.com/neoclide/coc.nvim)
-- Smooth Scrolling (its really smooth!)
 - Fully integrated with fzf
 - Live Markdown preview
 - Simple, Intuitive shortcuts
@@ -95,6 +94,7 @@ as well, they work the same way as vim-plug plugins.
 | `leader + r` | reload nvim config                   |
 | `leader + w` | save changes                         |
 | `leader + e` | call :PlugInstall (install plug-ins) |
+| `leader + ö` | Open NERDTree                        |
 | `Enter`      | enter empty line in normal mode      |
 | `F2`         | trim white spaces                    |
 | `F6`         | open Startify                        |

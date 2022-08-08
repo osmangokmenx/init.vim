@@ -17,7 +17,7 @@ Plug 'ryanoasis/vim-devicons'                           " pretty icons everywher
 "Plug 'luochen1990/rainbow'                              " rainbow parenthesis
 Plug 'hzchirs/vim-material'                             " material color themes
 Plug 'gregsexton/MatchTag'                              " highlight matching html tags
-Plug 'Jorengarenar/vim-MvVis'                           " move visual selection
+"Plug 'Jorengarenar/vim-MvVis'                           " move visual selection
 "}}}
 
 " ================= Functionalities ================= "{{{
@@ -26,41 +26,72 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }     " fzf itself
 Plug 'junegunn/fzf.vim'                                 " fuzzy search integration
 Plug 'honza/vim-snippets'                               " actual snippets
-Plug 'Yggdroot/indentLine'                              " show indentation lines
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " better python
 Plug 'tpope/vim-commentary'                             " better commenting
 Plug 'mhinz/vim-startify'                               " cool start up screen
 Plug 'tpope/vim-fugitive'                               " git support
-Plug 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
-Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
-Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
-Plug 'machakann/vim-sandwich'                           " make sandwiches
-Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
+
+"Plug 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
+"Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
+"Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
+"Plug 'machakann/vim-sandwich'                           " make sandwiches
+"Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " better python
+
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'memgraph/cypher.vim'
 
 " ================= Others ================= "{{{
 Plug 'preservim/nerdtree'
-Plug 'vimwiki/vimwiki'
-"}}}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-" ================= Others ================= "{{{
-" Plug 'ryanoasis/vim-devicons'
+"}}}
+" ================= Development ================= "{{{
+Plug 'sheerun/vim-polyglot'
+Plug 'vimwiki/vimwiki'
+Plug 'osmangokmenx/onedark.vim'
+" Plug 'vim-airline/vim-airline'
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
+" zen
+Plug 'folke/zen-mode.nvim'
+Plug 'folke/twilight.nvim'
+
+" fun
+" Plug 'tamton-aquib/zone.nvim'
 call plug#end()
 
+
+lua << EOF
+  require("zen-mode").setup {
+    tmux = { enabled = false},
+
+  }
+  require("twilight").setup {}
+
+EOF
 "}}}
+"require("zone").setup()
+
 
 " ==================== general config ======================== "{{{
 
 set termguicolors                                       " Opaque Background
 set mouse=a                                             " enable mouse scrolling
 set clipboard+=unnamedplus                              " use system clipboard by default
-set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
+set tabstop=2 softtabstop=2 shiftwidth=2 autoindent     " tab width
 set expandtab smarttab                                  " tab key actions
 set incsearch ignorecase smartcase hlsearch             " highlight text while searching
 set list listchars=trail:»,tab:»-                       " use tab to navigate in list mode
-set fillchars+=vert:\▏                                  " requires a patched nerd font (try FiraCode)
+set fillchars+=vert:\|                                  " requires a patched nerd font (try FiraCode)
 set wrap breakindent                                    " wrap long lines to the width set by tw
+
 set encoding=utf-8                                      " text encoding
 set number                                              " enable numbers on the left
 " set relativenumber                                      " current line is 0
@@ -100,21 +131,28 @@ set shortmess+=c
 set signcolumn=yes
 
 " Themeing
-let g:material_style = 'oceanic'
-colorscheme vim-material
+"let g:material_style = 'oceanic'
+"colorscheme vim-material
+colorscheme onedark
+
+"colorscheme spaceduck
+
 hi Pmenu guibg='#00010a' guifg=white                    " popup menu colors
 hi Comment gui=italic cterm=italic                      " italic comments
-hi Search guibg=#b16286 guifg=#ebdbb2 gui=NONE          " search string highlight color
+hi Search guibg=#3E4451  guifg=#ebdbb2 gui=NONE          " search string highlight color
 hi NonText guifg=bg                                     " mask ~ on empty lines
 hi clear CursorLineNr                                   " use the theme color for relative number
 hi CursorLineNr gui=bold                                " make relative number bold
 hi SpellBad guifg=NONE gui=bold,undercurl               " misspelled words
 
 " colors for git (especially the gutter)
-hi DiffAdd  guibg=#0f111a guifg=#43a047
-hi DiffChange guibg=#0f111a guifg=#fdd835
-hi DiffRemoved guibg=#0f111a guifg=#e53935
+hi DiffAdd guibg=#141414 guifg=#43a047
+hi DiffChange guibg=#141414 guifg=#fdd835
+hi DiffRemoved guibg=#141441 guifg=#e53935
 
+"hi DiffAdd  guibg=#0f111a guifg=#43a047
+"hi DiffChange guibg=#0f111a guifg=#fdd835
+"hi DiffRemoved guibg=#0f111a guifg=#e53935
 " coc multi cursor highlight color
 hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
 
@@ -141,9 +179,10 @@ let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
 
 " list of the extensions to make sure are always installed
+
+"           \'coc-airs',
 let g:coc_global_extensions = [
             \'coc-yank',
-            \'coc-pairs',
             \'coc-json',
             \'coc-css',
             \'coc-html',
@@ -163,10 +202,11 @@ let g:coc_global_extensions = [
             \]
 
 " indentLine
-let g:indentLine_char_list = ['▏', '¦', '┆', '┊']
-let g:indentLine_setColors = 0
-let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
-let g:indentLine_fileTypeExclude = ['startify']
+"let g:indentLine_char_list = ['▏', '¦','┆', '┊']
+"let g:indentLine_setColors = 0
+"let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
+"let g:indentLine_fileTypeExclude = ['startify']
+
 
 "" startify
 let g:startify_padding_left = 10
@@ -186,7 +226,7 @@ let  g:startify_bookmarks =  [
     \ {'v': '~/.config/nvim'},
     \ {'p': '~/Documents/Projects' },
     \ {'o': '~/Documents/opak' },
-    \ {'l': '~/Documents/opak/metasyon' }
+    \ {'l': '~/Documents/opak/metasyon/frontend' }
     \ ]
 
 " custom commands
@@ -212,19 +252,28 @@ let g:startify_custom_header = [
  \ '',
  \ '',
  \]
-
-" rainbow brackets
-let g:rainbow_active = 1
+"let g:startify_custom_header = [
+"  \'',
+"  \'             ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
+"  \"             ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+"  \"             ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+"  \"             ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+"  \"             ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+"  \"             ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+"  \ '',
+"  \ '',
+"  \ '',
+"  \]
 
 " tmux navigator
-let g:tmux_navigator_no_mappings = 1
+"let g:tmux_navigator_no_mappings = 1
 
 " semshi settings
 let g:semshi#error_sign	= v:false                       " let ms python lsp handle this
 
 "" FZF
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-n': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
@@ -359,6 +408,7 @@ map <S-Enter> O<ESC>
 "vnoremap d "_d
 "vnoremap p "_dP
 "nnoremap x "_x
+
 " emulate windows copy, cut behavior
 vnoremap <LeftRelease> "+y<LeftRelease>
 vnoremap <C-c> "+y<CR>
@@ -382,6 +432,7 @@ nnoremap <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " markdown preview
 au FileType markdown nmap <leader>m :MarkdownPreview<CR>
+let g:mkdp_filetypes = ['markdown', '.wiki']
 
 "" FZF
 nnoremap <silent> <leader>f :Files<CR>
@@ -424,6 +475,7 @@ nmap <leader>o :OR <CR>
 
 " jump stuff
 nmap <leader>jd <Plug>(coc-definition)
+
 nmap <leader>jy <Plug>(coc-type-definition)
 nmap <leader>ji <Plug>(coc-implementation)
 nmap <leader>jr <Plug>(coc-references)
@@ -438,21 +490,31 @@ nmap <leader>gd :Gdiffsplit<CR>
 nmap <leader>gb :Git blame<CR>
 
 " tmux navigator
-nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+"nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+"nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+"nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+"nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+
+" zen mode
+nmap <leader>zz :ZenMode<CR>
+nmap <leader>zx  :quit<CR>
+nmap <leader>zf :Twilight<CR>
+
+let g:autoclose_on = 0
 
 "}}}
 
 
 " ======================== Additional sourcing ====================== "{{{
-source ~/.config/nvim/statusline.vim
+ source ~/.config/nvim/statusline.vim
 
 "}}}
 
 " ======================== Others ====================== "{{{
 
 nnoremap <leader>ö :NERDTreeToggle<CR>
+let g:vimwiki_list = [{'path': '~/vimwiki'}]
 
+"let g:airline_theme='onedark'
 "}}}
+

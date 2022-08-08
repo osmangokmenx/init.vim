@@ -45,26 +45,26 @@ endfunction
 function! ModeIcon(mode) " {{{
     " Normal mode
     if a:mode == 'n'
-        return '煮'
+        return ' 煮 '
         " Insert mode
     elseif a:mode == 'i'
-        return ' '
+        return '  '
         " Replace mode
     elseif a:mode == 'R'
-        return ' '
+        return '   '
         " Visual mode
     elseif a:mode == 'v'
-        return ' '
+        return '   '
     elseif a:mode == 'V'
-        return ' '
+        return '   '
     elseif a:mode == "\<C-V>"
-        return '礪'
+        return ' 礪 '
         " Command mode
     elseif a:mode == 'c'
-        return '⌘ '
+        return ' ⌘  '
         " Terminal mode
     elseif a:mode == 't'
-        return 'ﰣ '
+        return ' ﰣ  '
     endif
     return ''
 endfunction
@@ -72,16 +72,16 @@ endfunction
 function! SetModifiedSymbol(modified) " {{{
     if a:modified == 1
         hi CustomStatuslineModifiedBody cterm=none gui=none ctermbg=1 ctermfg=0 guibg=#fc8993 guifg=#272c38
-        hi CustomStatuslineModified cterm=none gui=none ctermbg=none ctermfg=1 guibg=none guifg=#fc8993
-    else
+        hi CustomStatuslineModified cterm=none gui=none ctermbg=0 ctermfg=1 guibg=0 guifg=#fc8993
+      else
         hi CustomStatuslineModifiedBody cterm=none gui=none ctermbg=0 ctermfg=2 guibg=#1d212a guifg=#89e19c
         hi CustomStatuslineModified cterm=none gui=none ctermbg=0 ctermfg=0 guibg=none guifg=#1d212a
     endif
-    return ''
+    return '  '
 endfunction
 
 function! FiletypeIcon()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' : ' ') : ''
+    return winwidth(0) > 70 ? (strlen(&filetype) ? ' '. WebDevIconsGetFileTypeSymbol() . ' '  : '  ') : ''
 endfunction
 function! SetFiletype(filetype) " {{{
     if winwidth(0) > 70
@@ -109,7 +109,7 @@ function GitBranchIcon()
         hi CustomStatuslineGitbranchIcon      cterm=none gui=none ctermbg=4 ctermfg=0 guibg=#81d4ee guifg=#272c38
         hi CustomStatuslineGitbranchBody      cterm=none gui=none ctermbg=8    ctermfg=4 guibg=#272c38 guifg=#81d4ee
         hi CustomStatuslineGitbranchSeparator cterm=none gui=none ctermbg=none ctermfg=8 guibg=none    guifg=#272c38
-        return ' '
+        return '  '
     else
         hi CustomStatuslineGitbranch          cterm=none gui=none ctermbg=none ctermfg=0 guibg=none    guifg=#1d212a
         hi CustomStatuslineGitbranchIcon      cterm=none gui=none ctermbg=0    ctermfg=0 guibg=#1d212a guifg=#1d212a
@@ -154,37 +154,37 @@ function! SetActiveStatusLine()
     let statusline  = "%{RedrawModeColors(mode())}"
     " Left side items
     " =======================
-    let statusline .= "%#CustomStatuslineAccent#"
-    let statusline .= "%#CustomStatuslineAccentBody#%{ModeIcon(mode())}"
+    let statusline .= "%#CustomStatuslineAccent# "
+    let statusline .= "%#CustomStatuslineAccentBody#%{ ModeIcon(mode())}"
     let statusline .= "%#CustomStatuslineFilename#\ %t\ "
-    let statusline .= "%#CustomStatuslineSeparator#\ "
+    let statusline .= "%#CustomStatuslineSeparator#\ "
     " Modified status
-    let statusline .= "%#CustomStatuslineModified#"
+    let statusline .= "%#CustomStatuslineModified#  "
     let statusline .= "%#CustomStatuslineModifiedBody#%{SetModifiedSymbol(&modified)}"
-    let statusline .= "%#CustomStatuslineModified#"
+    let statusline .= "%#CustomStatuslineModified#"
     " Right side items
     " =======================
     let statusline .= "%="
     " Git branch name
-    let statusline .= "%#CustomStatuslineGitbranch#"
+    let statusline .= "%#CustomStatuslineGitbranch# "
     let statusline .= "%#CustomStatuslineGitbranchIcon#%{GitBranchIcon()}"
-    let statusline .= "%#CustomStatuslineGitbranchBody#\ %{FugitiveHead()}"
-    let statusline .= "%#CustomStatuslineGitbranchSeparator#\ "
+    let statusline .= "%#CustomStatuslineGitbranchBody#\ %{FugitiveHead()} "
+    let statusline .= "%#CustomStatuslineGitbranchSeparator# \ "
     " Padding
     let statusline .= "\ "
     " Current line / total number of lines
-    let statusline .= "%#CustomStatuslineTotalLines#"
-    let statusline .= "%#CustomStatuslineTotalLinesIcon# "
+    let statusline .= "%#CustomStatuslineTotalLines# "
+    let statusline .= "%#CustomStatuslineTotalLinesIcon#  "
     let statusline .= "%#CUSTomStatuslineTotalLinesBody#\ %l"
-    let statusline .= "\/\%#CUSTomStatuslineTotalLinesBody#%L"
-    let statusline .= "%#CustomStatuslineTotalLinesSeparator#"
+    let statusline .= "\/\%#CUSTomStatuslineTotalLinesBody#%L "
+    let statusline .= "%#CustomStatuslineTotalLinesSeparator#"
     " Padding
     let statusline .= "\ "
     " Filetype
-    let statusline .= "%#CustomStatuslineFiletype#"
+    let statusline .= "%#CustomStatuslineFiletype#"
     let statusline .= "%#CustomStatuslineFiletypeIcon#%{FiletypeIcon()}"
-    let statusline .= "%#CustomStatuslineFiletypeBody#\ %{SetFiletype(&filetype)}"
-    let statusline .= "%#CustomStatuslineFiletypeSeparator#\ "
+    let statusline .= "%#CustomStatuslineFiletypeBody#\ %{SetFiletype(&filetype)} "
+    let statusline .= "%#CustomStatuslineFiletypeSeparator# \ "
     return statusline
 endfunction
 
@@ -193,37 +193,37 @@ function! SetInactiveStatusLine()
     let statusline  = "%{RedrawModeColors(mode())}"
     " Left side items
     " =======================
-    let statusline .= "%#CustomStatuslineAccent#"
+    let statusline .= "%#CustomStatuslineAccent# "
     let statusline .= "%#CustomStatuslineAccentBody#%{ModeIcon(mode())}"
     let statusline .= "%#CustomStatuslineFilename#\ %t\ "
-    let statusline .= "%#CustomStatuslineSeparator#\ "
+    let statusline .= "%#CustomStatuslineSeparator#\ "
     " Modified status
-    let statusline .= "%#CustomStatuslineModified#"
+    let statusline .= "%#CustomStatuslineModified# "
     let statusline .= "%#CustomStatuslineModifiedBody#%{SetModifiedSymbol(&modified)}"
-    let statusline .= "%#CustomStatuslineModified#"
+    let statusline .= "%#CustomStatuslineModified#"
     " Right side items
     " =======================
     let statusline .= "%="
     " Git branch name
-    let statusline .= "%#CustomStatuslineGitbranch#"
+    let statusline .= "%#CustomStatuslineGitbranch# "
     let statusline .= "%#CustomStatuslineGitbranchIcon#%{GitBranchIcon()}"
     let statusline .= "%#CustomStatuslineGitbranchBody#\ %{FugitiveHead()}"
-    let statusline .= "%#CustomStatuslineGitbranchSeparator#\ "
+    let statusline .= "%#CustomStatuslineGitbranchSeparator# \ "
     " Padding
     let statusline .= "\ "
     " Current line / total number of lines
-    let statusline .= "%#CustomStatuslineTotalLines#"
+    let statusline .= "%#CustomStatuslineTotalLines# "
     let statusline .= "%#CustomStatuslineTotalLinesIcon# "
     let statusline .= "%#CUSTomStatuslineTotalLinesBody#\ %l"
     let statusline .= "\/\%#CUSTomStatuslineTotalLinesBody#%L"
-    let statusline .= "%#CustomStatuslineTotalLinesSeparator#"
+    let statusline .= "%#CustomStatuslineTotalLinesSeparator# "
     " Padding
     let statusline .= "\ "
     " Filetype
-    let statusline .= "%#CustomStatuslineFiletype#"
+    let statusline .= "%#CustomStatuslineFiletype# "
     let statusline .= "%#CustomStatuslineFiletypeIcon#%{FiletypeIcon()}"
     let statusline .= "%#CustomStatuslineFiletypeBody#\ %{SetFiletype(&filetype)}"
-    let statusline .= "%#CustomStatuslineFiletypeSeparator#\ "
+    let statusline .= "%#CustomStatuslineFiletypeSeparator# \ "
     return statusline
 endfunction
 
