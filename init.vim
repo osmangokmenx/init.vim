@@ -64,6 +64,8 @@ Plug 'folke/zen-mode.nvim'
 Plug 'folke/twilight.nvim'
 
 " fun
+Plug 'petertriho/nvim-scrollbar'
+
 " Plug 'tamton-aquib/zone.nvim'
 call plug#end()
 
@@ -74,6 +76,7 @@ lua << EOF
 
   }
   require("twilight").setup {}
+  require("scrollbar").setup()
 
 EOF
 "}}}
@@ -452,14 +455,14 @@ vmap <F1> <plug>(fzf-maps-x)
 "" coc
 
 " use tab to navigate snippet placeholders
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+" inoremap <silent><expr> <TAB>
+"     \ pumvisible() ? "\<C-n>" :
+"     \ <SID>check_back_space() ? "\<TAB>" :
+"     \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Use enter to accept snippet expansion
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " multi cursor shortcuts
 nmap <silent> <C-a> <Plug>(coc-cursors-word)
