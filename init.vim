@@ -63,7 +63,6 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'folke/zen-mode.nvim'
 Plug 'folke/twilight.nvim'
 
-" fun
 Plug 'petertriho/nvim-scrollbar'
 
 " Plug 'tamton-aquib/zone.nvim'
@@ -442,7 +441,7 @@ nnoremap <silent> <leader>f :Files<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>c :Commands<CR>
 nmap <leader>t :BTags<CR>
-nmap <leader>/ :Rg<CR>
+nmap <leader>r :Rg<CR>
 nmap <leader>gc :Commits<CR>
 nmap <leader>gs :GFiles?<CR>
 nmap <leader>sh :History/<CR>
@@ -520,4 +519,4 @@ let g:vimwiki_list = [{'path': '~/vimwiki'}]
 
 "let g:airline_theme='onedark'
 "}}}
-
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
